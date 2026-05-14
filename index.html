@@ -509,7 +509,7 @@
 
 <script>
 const ans = {};
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyR-3edT_aXPeMzr_kcgwQSk00CC1PwmldquZIH_vsxLkRLj6Bpj3Ss8q5vbgnbB8gsbA/exec';
+const SHEETS_URL = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT';
 
 const courses = {
   negocios:   ['Administração','Gestão de RH','Contabilidade','Marketing','Logística'],
@@ -641,11 +641,13 @@ function enviar() {
     `Aguardo o contato!`
   );
 
+  const numero = ans.polo === 'santa_cruz' ? '5521971049585' : '5521999984067';
+
   document.getElementById('quizCard').style.display = 'none';
   document.getElementById('successScreen').classList.add('show');
 
   setTimeout(() => {
-    window.open('https://wa.me/5521999984067?text=' + msg, '_blank');
+    window.open('https://wa.me/' + numero + '?text=' + msg, '_blank');
   }, 700);
 }
 </script>
