@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polo UNINTER Rio de Janeiro – Descubra seu Curso Ideal</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue-dark: #0b2d4e;
+    --blue-mid: #1a5c96;
+    --blue-light: #2e8de0;
+    --blue-pale: #e8f3fd;
+    --green: #25D366;
+    --green-dark: #1aaa50;
+    --gold: #f5a623;
+    --text: #1a1a2e;
+    --text-muted: #5a6a7e;
+    --border: #d4e4f5;
+    --bg: #f4f8fd;
+    --white: #ffffff;
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--blue-dark);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(46,141,224,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 10% 80%, rgba(26,92,150,0.3) 0%, transparent 60%);
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    max-width: 560px;
+    margin: 0 auto 1rem;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 15px; color: rgba(255,255,255,0.72);
+    max-width: 440px; margin: 0 auto 1.75rem;
+  }
+  .trust-badges {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    justify-content: center;
+  }
+  .trust-badge {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px;
+    padding: 5px 13px;
+    font-size: 12px; color: rgba(255,255,255,0.82);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .trust-badge svg { width: 13px; height: 13px; }
+
+  /* ─── MAIN CONTAINER ─── */
+  .main {
+    max-width: 620px;
+    margin: -1px auto 0;
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  /* ─── QUIZ CARD ─── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 1.75rem 1.5rem;
+    box-shadow: 0 4px 24px rgba(11,45,78,0.07);
+  }
+
+  .progress-wrap { margin-bottom: 1.5rem; }
+  .progress-header {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--text-muted);
+    margin-bottom: 6px; font-weight: 500;
+  }
+  .progress-track {
+    height: 5px;
+    background: var(--blue-pale);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-mid), var(--blue-light));
+    border-radius: 999px;
+    transition: width 0.4s cubic-bezier(.4,0,.2,1);
+  }
+
+  .step { display: none; }
+  .step.active { display: block; animation: fadeUp 0.3s ease; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-q {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--blue-dark);
+    margin-bottom: 1.25rem;
+    line-height: 1.3;
+  }
+
+  .opts {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+  .opt {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 13px 16px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 12px;
+    background: var(--white);
+    transition: border-color 0.15s, background 0.15s, transform 0.1s;
+    text-align: left;
+    width: 100%;
+  }
+  .opt:hover { border-color: var(--blue-light); background: var(--blue-pale); transform: translateX(2px); }
+  .opt.selected { border-color: var(--blue-mid); background: var(--blue-pale); }
+  .opt-icon {
+    width: 38px; height: 38px; border-radius: 9px;
+    background: var(--blue-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .opt.selected .opt-icon { background: var(--blue-mid); }
+  .opt-icon svg { width: 18px; height: 18px; stroke: var(--blue-mid); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .opt.selected .opt-icon svg { stroke: #fff; }
+  .opt-label { font-size: 14px; font-weight: 600; color: var(--text); }
+  .opt-desc { font-size: 12px; color: var(--text-muted); margin-top: 1px; line-height: 1.4; }
+
+  .nav { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; }
+  .btn-back {
+    background: none; border: none; cursor: pointer;
+    font-size: 13px; color: var(--text-muted);
+    font-family: inherit; font-weight: 500;
+    padding: 8px 0;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .btn-back:hover { color: var(--blue-mid); }
+  .btn-next {
+    background: var(--blue-mid);
+    color: #fff; border: none;
+    border-radius: var(--radius-sm);
+    padding: 11px 26px;
+    font-size: 14px; font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    opacity: 0.35; pointer-events: none;
+    transition: opacity 0.2s, background 0.15s, transform 0.1s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .btn-next.ready { opacity: 1; pointer-events: auto; }
+  .btn-next.ready:hover { background: var(--blue-dark); transform: translateY(-1px); }
+  .btn-next.ready:active { transform: scale(0.98); }
+
+  /* ─── RESULT ─── */
+  .result-hero {
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue-mid));
+    border-radius: var(--radius-sm);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    display: flex; gap: 12px; align-items: center;
+  }
+  .result-area-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; flex-shrink: 0;
+  }
+  .result-area-label { font-size: 12px; color: rgba(255,255,255,0.65); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+  .result-area-name { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: #fff; line-height: 1.2; }
+
+  .bolsa-banner {
+    background: var(--blue-pale);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .bolsa-left .bolsa-lbl { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+  .bolsa-left .bolsa-de { font-size: 13px; color: var(--text-muted); text-decoration: line-through; margin-top: 2px; }
+  .bolsa-right { text-align: right; }
+  .bolsa-pct { font-size: 11px; font-weight: 700; color: var(--blue-light); text-transform: uppercase; }
+  .bolsa-val { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; color: var(--blue-dark); line-height: 1; }
+  .bolsa-mes { font-size: 12px; color: var(--text-muted); }
+
+  .courses-label { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 8px; }
+  .courses-wrap { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 1rem; }
+  .course-pill {
+    background: var(--blue-pale);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 13px;
+    font-size: 12px; font-weight: 600;
+    color: var(--blue-mid);
+  }
+
+  .disclaimer { font-size: 11px; color: var(--text-muted); margin-bottom: 1.25rem; padding: 8px 12px; background: #f9fbfe; border-radius: var(--radius-sm); border-left: 3px solid var(--border); }
+
+  /* ─── LEAD FORM ─── */
+  .form-section { border-top: 1.5px dashed var(--border); padding-top: 1.25rem; }
+  .form-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; color: var(--blue-dark); margin-bottom: 4px; }
+  .form-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 1rem; }
+  .form-fields { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1rem; }
+  .field-wrap { position: relative; }
+  .field-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; stroke: var(--text-muted); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+  .form-input {
+    width: 100%;
+    padding: 11px 12px 11px 36px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14px; font-family: inherit;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .form-input:focus { border-color: var(--blue-mid); }
+  .form-input::placeholder { color: #aab5c3; }
+
+  .btn-wpp {
+    width: 100%;
+    background: var(--green);
+    color: #fff; border: none;
+    border-radius: var(--radius-sm);
+    padding: 15px;
+    font-size: 15px; font-weight: 700; font-family: inherit;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    transition: background 0.15s, transform 0.1s, opacity 0.2s;
+    opacity: 0.4; pointer-events: none;
+  }
+  .btn-wpp svg { width: 20px; height: 20px; fill: #fff; }
+  .btn-wpp.ready { opacity: 1; pointer-events: auto; }
+  .btn-wpp.ready:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .btn-wpp.ready:active { transform: scale(0.98); }
+
+  .privacy { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+  .privacy svg { width: 11px; height: 11px; stroke: var(--text-muted); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+  /* ─── SUCCESS ─── */
+  .success { display: none; text-align: center; padding: 2.5rem 1rem; animation: fadeUp 0.4s ease; }
+  .success.show { display: block; }
+  .success-circle {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: #e8faf1;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem;
+  }
+  .success-circle svg { width: 36px; height: 36px; stroke: var(--green); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .success h2 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--blue-dark); margin-bottom: 0.5rem; }
+  .success p { font-size: 14px; color: var(--text-muted); max-width: 340px; margin: 0 auto; line-height: 1.6; }
+
+  /* ─── FOOTER TRUST ─── */
+  .footer-trust {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+    margin-top: 1.5rem; padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+  .ft-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--text-muted); font-weight: 600;
+  }
+  .ft-item svg { width: 15px; height: 15px; stroke: var(--blue-light); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+    Polo UNINTER · Rio de Janeiro
+  </div>
+  <h1>Qual curso é ideal<br>para <em>você</em>?</h1>
+  <p class="hero-sub">Responda 5 perguntas rápidas e descubra seu curso + sua simulação de bolsa personalizada.</p>
+  <div class="trust-badges">
+    <span class="trust-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      2 minutos
+    </span>
+    <span class="trust-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      100% gratuito
+    </span>
+    <span class="trust-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      MEC aprovado
+    </span>
+    <span class="trust-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Hexa campeã Reclame Aqui
+    </span>
+  </div>
+</div>
+
+<div class="main">
+  <div class="card" id="quizCard">
+    <div class="progress-wrap">
+      <div class="progress-header">
+        <span id="stepLabel">Passo 1 de 5</span>
+        <span id="pctLabel">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="pFill" style="width:0%"></div></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step active" id="s1">
+      <p class="step-q">Qual área mais combina com você?</p>
+      <div class="opts">
+        <button class="opt" onclick="pick(this,'area','negocios')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+          <div><div class="opt-label">Negócios e Gestão</div><div class="opt-desc">Administração, RH, Contabilidade, Marketing</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'area','tecnologia')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div><div class="opt-label">Tecnologia</div><div class="opt-desc">TI, Sistemas, Engenharia de Software, IA</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'area','educacao')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <div><div class="opt-label">Educação</div><div class="opt-desc">Pedagogia, Licenciaturas, Psicopedagogia</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'area','saude')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <div><div class="opt-label">Saúde e Bem-estar</div><div class="opt-desc">Nutrição, Ed. Física, Psicanálise</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'area','direito')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg></div>
+          <div><div class="opt-label">Direito e Segurança</div><div class="opt-desc">Direito, Segurança Pública, Criminologia</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'area','outros')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><div class="opt-label">Ainda não sei</div><div class="opt-desc">Quero explorar as opções disponíveis</div></div>
+        </button>
+      </div>
+      <div class="nav"><span></span><button class="btn-next" id="n1" onclick="go(2)">Próximo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step" id="s2">
+      <p class="step-q">Como você prefere estudar?</p>
+      <div class="opts">
+        <button class="opt" onclick="pick(this,'modo','ead')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+          <div><div class="opt-label">EAD – 100% online</div><div class="opt-desc">Estudo de onde e quando quiser, sem presença obrigatória</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'modo','semi')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div><div class="opt-label">Semipresencial</div><div class="opt-desc">Aulas online + encontros presenciais no polo</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'modo','qualquer')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div><div class="opt-label">Sem preferência</div><div class="opt-desc">Quero conhecer todas as opções</div></div>
+        </button>
+      </div>
+      <div class="nav"><button class="btn-back" onclick="go(1)">← Voltar</button><button class="btn-next" id="n2" onclick="go(3)">Próximo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step" id="s3">
+      <p class="step-q">Você fez o ENEM?</p>
+      <div class="opts">
+        <button class="opt" onclick="pick(this,'enem','acima500')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div><div class="opt-label">Sim, acima de 500 pontos</div><div class="opt-desc">Posso usar a nota para conseguir bolsa de até 80%</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'enem','abaixo500')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+          <div><div class="opt-label">Sim, abaixo de 500 pontos</div><div class="opt-desc">Ainda posso aproveitar a nota para descontos</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'enem','nao')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+          <div><div class="opt-label">Não fiz / Não tenho nota</div><div class="opt-desc">Posso fazer o vestibular online gratuito da UNINTER</div></div>
+        </button>
+      </div>
+      <div class="nav"><button class="btn-back" onclick="go(2)">← Voltar</button><button class="btn-next" id="n3" onclick="go(4)">Próximo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step" id="s4">
+      <p class="step-q">Quando pretende começar?</p>
+      <div class="opts">
+        <button class="opt" onclick="pick(this,'inicio','agora')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div><div class="opt-label">O mais rápido possível</div><div class="opt-desc">Quero me matricular ainda esse mês</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'inicio','semestre')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div><div class="opt-label">No próximo semestre</div><div class="opt-desc">Estou me planejando para em breve</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'inicio','pesquisando')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <div><div class="opt-label">Ainda estou pesquisando</div><div class="opt-desc">Quero conhecer melhor antes de decidir</div></div>
+        </button>
+      </div>
+      <div class="nav"><button class="btn-back" onclick="go(3)">← Voltar</button><button class="btn-next" id="n4" onclick="go(5)">Próximo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></div>
+    </div>
+
+    <!-- Step 5 – Polo -->
+    <div class="step" id="s5">
+      <p class="step-q">Qual polo é mais perto de você?</p>
+      <div class="opts">
+        <button class="opt" onclick="pick(this,'polo','campo_grande')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div><div class="opt-label">Polo Campo Grande – LAPAD</div><div class="opt-desc">Região de Campo Grande, Rio de Janeiro</div></div>
+        </button>
+        <button class="opt" onclick="pick(this,'polo','santa_cruz')">
+          <div class="opt-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div><div class="opt-label">Polo Santa Cruz</div><div class="opt-desc">Região de Santa Cruz, Rio de Janeiro</div></div>
+        </button>
+      </div>
+      <div class="nav"><button class="btn-back" onclick="go(4)">← Voltar</button><button class="btn-next" id="n5" onclick="showResult()">Ver minha indicação 🎉</button></div>
+    </div>
+
+    <!-- Result -->
+    <div class="step" id="sResult">
+      <div id="resultBody"></div>
+      <div class="form-section">
+        <p class="form-title">🎁 Garanta sua bolsa agora</p>
+        <p class="form-sub">Preencha abaixo para um consultor confirmar sua vaga com o desconto aplicado.</p>
+        <div class="form-fields">
+          <div class="field-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input class="form-input" type="text" id="fNome" placeholder="Seu nome completo" oninput="checkForm()">
+          </div>
+          <div class="field-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <input class="form-input" type="tel" id="fTel" placeholder="Seu WhatsApp (ex: 21 99999-0000)" oninput="checkForm()">
+          </div>
+          <div class="field-wrap">
+            <svg class="field-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <input class="form-input" type="email" id="fEmail" placeholder="Seu melhor e-mail" oninput="checkForm()">
+          </div>
+        </div>
+        <button class="btn-wpp" id="btnWpp" onclick="enviar()">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Falar com consultor e garantir minha bolsa
+        </button>
+        <p class="privacy">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Seus dados são confidenciais. Sem spam.
+        </p>
+      </div>
+
+      <div class="footer-trust">
+        <div class="ft-item"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>+1 milhão de alunos formados</div>
+        <div class="ft-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>MEC credenciada</div>
+        <div class="ft-item"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Hexa Reclame Aqui</div>
+        <div class="ft-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>+800 polos no Brasil</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="success card" id="successScreen">
+    <div class="success-circle">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>Mensagem enviada! 🎉</h2>
+    <p>Em breve um consultor do polo entrará em contato no seu WhatsApp com sua simulação de bolsa e os próximos passos para a matrícula.</p>
+  </div>
+</div>
+
+<script>
+const ans = {};
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyR-3edT_aXPeMzr_kcgwQSk00CC1PwmldquZIH_vsxLkRLj6Bpj3Ss8q5vbgnbB8gsbA/exec';
+
+const courses = {
+  negocios:   ['Administração','Gestão de RH','Contabilidade','Marketing','Logística'],
+  tecnologia: ['Análise e Des. de Sistemas','Eng. de Software','Segurança da Info.','Ciência de Dados + IA'],
+  educacao:   ['Pedagogia','Letras','Matemática','Psicopedagogia','Educação Especial'],
+  saude:      ['Nutrição','Educação Física','Psicanálise','Cuidador de Idosos'],
+  direito:    ['Direito','Segurança Pública','Criminologia'],
+  outros:     ['Administração','Pedagogia','Análise e Des. de Sistemas','Marketing'],
+};
+const bolsas = {
+  acima500: {pct:'80%', de:'R$ 649', por:'R$ 129'},
+  abaixo500:{pct:'50%', de:'R$ 649', por:'R$ 324'},
+  nao:      {pct:'40%', de:'R$ 649', por:'R$ 389'},
+};
+const areaInfo = {
+  negocios:   {label:'Negócios e Gestão', emoji:'💼'},
+  tecnologia: {label:'Tecnologia',        emoji:'💻'},
+  educacao:   {label:'Educação',          emoji:'📚'},
+  saude:      {label:'Saúde e Bem-estar', emoji:'❤️'},
+  direito:    {label:'Direito e Segurança',emoji:'⚖️'},
+  outros:     {label:'Múltiplas Áreas',   emoji:'🎓'},
+};
+const poloInfo = {
+  campo_grande: 'Polo Campo Grande – LAPAD',
+  santa_cruz:   'Polo Santa Cruz',
+};
+
+function pick(btn, key, val) {
+  btn.closest('.opts').querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  ans[key] = val;
+  const sn = btn.closest('.step').id.replace('s','');
+  const nb = document.getElementById('n' + sn);
+  if (nb) nb.classList.add('ready');
+}
+
+function go(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('s' + n).classList.add('active');
+  const pct = ((n - 1) / 5) * 100;
+  document.getElementById('pFill').style.width = pct + '%';
+  document.getElementById('pctLabel').textContent = Math.round(pct) + '%';
+  document.getElementById('stepLabel').textContent = 'Passo ' + n + ' de 5';
+}
+
+function showResult() {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('sResult').classList.add('active');
+  document.getElementById('pFill').style.width = '100%';
+  document.getElementById('pctLabel').textContent = '100%';
+  document.getElementById('stepLabel').textContent = 'Resultado';
+
+  const area = ans.area || 'outros';
+  const enem = ans.enem || 'nao';
+  const polo = ans.polo || 'campo_grande';
+  const b = bolsas[enem];
+  const ai = areaInfo[area];
+  const pills = (courses[area] || courses.outros).map(c =>
+    `<span class="course-pill">${c}</span>`
+  ).join('');
+
+  document.getElementById('resultBody').innerHTML = `
+    <div class="result-hero">
+      <div class="result-area-icon">${ai.emoji}</div>
+      <div>
+        <div class="result-area-label">Sua área indicada</div>
+        <div class="result-area-name">${ai.label}</div>
+      </div>
+    </div>
+    <div class="bolsa-banner">
+      <div class="bolsa-left">
+        <div class="bolsa-lbl">Simulação de bolsa</div>
+        <div class="bolsa-de">De ${b.de}/mês</div>
+      </div>
+      <div class="bolsa-right">
+        <div class="bolsa-pct">↓ Desconto de ${b.pct}</div>
+        <div class="bolsa-val">${b.por}</div>
+        <div class="bolsa-mes">por mês*</div>
+      </div>
+    </div>
+    <div style="background:var(--blue-pale);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:1rem;display:flex;align-items:center;gap:8px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a5c96" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span style="font-size:13px;font-weight:600;color:#1a5c96">${poloInfo[polo]}</span>
+    </div>
+    <div class="courses-label">Cursos recomendados para você</div>
+    <div class="courses-wrap">${pills}</div>
+    <div class="disclaimer">* Valores estimados com base no perfil informado. Sujeito a confirmação com o consultor e elegibilidade ao benefício.</div>
+  `;
+}
+
+function checkForm() {
+  const n = document.getElementById('fNome').value.trim();
+  const t = document.getElementById('fTel').value.trim();
+  const e = document.getElementById('fEmail').value.trim();
+  const btn = document.getElementById('btnWpp');
+  if (n.length > 2 && t.length > 7 && e.includes('@')) {
+    btn.classList.add('ready');
+  } else {
+    btn.classList.remove('ready');
+  }
+}
+
+function enviarSheets(dados) {
+  if (!SHEETS_URL || SHEETS_URL === 'COLE_AQUI_A_URL_DO_APPS_SCRIPT') return;
+  fetch(SHEETS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(dados)
+  }).catch(() => {});
+}
+
+function enviar() {
+  const nome  = document.getElementById('fNome').value.trim();
+  const tel   = document.getElementById('fTel').value.trim();
+  const email = document.getElementById('fEmail').value.trim();
+  const area  = (areaInfo[ans.area] || areaInfo.outros).label;
+  const polo  = poloInfo[ans.polo] || 'Não informado';
+  const enem  = {acima500:'Acima de 500pts', abaixo500:'Abaixo de 500pts', nao:'Não fez'}[ans.enem] || 'Não informado';
+  const inicio = {agora:'O mais rápido possível', semestre:'Próximo semestre', pesquisando:'Ainda pesquisando'}[ans.inicio] || 'Não informado';
+  const agora = new Date().toLocaleString('pt-BR');
+
+  enviarSheets({ nome, telefone: tel, email, area, polo, enem, inicio, data: agora });
+
+  const msg = encodeURIComponent(
+    `Olá! Vim pelo site do Polo UNINTER Rio de Janeiro e gostaria de saber mais sobre cursos e bolsas! 🎓\n\n` +
+    `📌 Nome: ${nome}\n📱 WhatsApp: ${tel}\n📧 E-mail: ${email}\n\n` +
+    `🏫 Polo: ${polo}\n🎯 Área de interesse: ${area}\n📝 Nota ENEM: ${enem}\n📅 Quando quer começar: ${inicio}\n\n` +
+    `Aguardo o contato!`
+  );
+
+  document.getElementById('quizCard').style.display = 'none';
+  document.getElementById('successScreen').classList.add('show');
+
+  setTimeout(() => {
+    window.open('https://wa.me/5521999984067?text=' + msg, '_blank');
+  }, 700);
+}
+</script>
+</body>
+</html>
